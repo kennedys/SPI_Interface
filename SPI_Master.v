@@ -27,7 +27,7 @@ module SPI_Master( input clk_50M,
 	end
 	
 	//This block will send data to the slave on rising edge
-	always @ (posedge clk_16Hz or negedge reset) begin
+	always @ (posedge clk_16Hz) begin
 			if(edgeTrigger && !SS) begin
 				MOSI_bit <= data[7];
 			end
@@ -36,19 +36,13 @@ module SPI_Master( input clk_50M,
 				bitCount <= bitCount + 1;
 			end else if (loadReg) begin
 				data <= {5'b00000, address};
-			end else if (!reset)begin
-				data <= {5'b00000, address};
 				bitCount <= 5'b00000;
-			end
+			end 
 		
 			if (bitCount == 16) begin
 				bitCount <= 5'b00000;
 			end
 			
-			if (!reset)begin
-				
-				
-			end
 			
 			edgeTrigger <= ~edgeTrigger;
 	end
@@ -61,7 +55,7 @@ module SPI_Master( input clk_50M,
 				SS <= 0;
 				SCLK <= 0;
 				loadReg <= 0;
-			end else if(bitCount == 0) begin
+			end else if(bitCount == 0 || !reset) begin
 				loadReg <= 1;
 			end
 			else begin
