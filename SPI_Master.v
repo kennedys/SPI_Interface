@@ -1,4 +1,4 @@
-module spi #(parameter CLK_DIV = 2)(
+module SPI_Interface #(parameter CLK_DIV = 2)(
         input clk,
         input rst,
         input miso,
