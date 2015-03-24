@@ -70,6 +70,7 @@ always @(posedge clk) begin
         sck_q <= sck_d;
         mosi_q <= mosi_d;
         dout_q <= dout_d;
+        ss_q <= ss_d;
     end
     
 end
