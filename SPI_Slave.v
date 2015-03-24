@@ -72,4 +72,5 @@ always @(posedge clk) begin
         dout_q <= dout_d;
     end
     
-    endmodule
+end
+endmodule
