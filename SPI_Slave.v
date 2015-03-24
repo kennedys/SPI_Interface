@@ -56,4 +56,20 @@ end
  
 always @(posedge clk) begin
     if (rst) begin
-        done_q
+        done_q <= 1'b0;
+        data_q <= 8'b0;
+        bit_ct_q <= 3'b0;
+        sck_q <= 1'b0;
+        mosi_q <= 1'b0;
+        dout_q <=8'b0;
+    end
+    else begin
+        done_q <= done_d;
+        data_q <= data_d;
+        bit_ct_q <= bit_ct_d;
+        sck_q <= sck_d;
+        mosi_q <= mosi_d;
+        dout_q <= dout_d;
+    end
+    
+    endmodule
